@@ -78,11 +78,12 @@ const PinDetail = ({ user }) => {
           justifyContent={"center"}
           alignItems={"center"}
           padding={5}
+          maxWidth={"100%"}
         >
           <img
-            src={pinDetail?.image && urlFor(pinDetail.image).width(500).url()}
+            src={pinDetail?.image && urlFor(pinDetail.image).url()}
             alt="user-post"
-            style={{ borderRadius: "32px", maxWidth: "100%" }}
+            style={{ borderRadius: "32px", maxWidth: "100%", height: "auto" }}
           />
         </Box>
       </Grid>
@@ -158,7 +159,7 @@ const PinDetail = ({ user }) => {
             gutterBottom
             sx={{
               fontSize: "38px",
-              wordWrap: "break-word", // Add this line
+              wordWrap: "break-word",
               overflowWrap: "break-word",
               textTransform: "capitalize",
             }}

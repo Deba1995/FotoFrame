@@ -19,8 +19,7 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
-const randomImage =
-  "https://source.unsplash.com/1600x900/?nature,photography,technology";
+const randomImage = "https://source.unsplash.com/1600x900/?photography";
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [pins, setPins] = useState(null);
