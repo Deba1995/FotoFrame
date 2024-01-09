@@ -27,6 +27,10 @@ const lightTheme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: `
+        * {
+          margin: 0;
+          padding: 0;
+        }
         *::-webkit-scrollbar {
           width: 10px;
         }
@@ -76,6 +80,10 @@ const darkTheme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: `
+        * {
+          margin: 0;
+          padding: 0;
+        }
         *::-webkit-scrollbar {
           width: 10px;
         }

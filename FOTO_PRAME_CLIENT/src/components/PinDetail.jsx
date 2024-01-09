@@ -36,7 +36,7 @@ const PinDetail = ({ user }) => {
             _key: uuidv4(),
             postedBy: {
               _type: "postedBy",
-              _ref: user._id,
+              _ref: user?._id,
             },
           },
         ])
@@ -82,7 +82,7 @@ const PinDetail = ({ user }) => {
           <img
             src={pinDetail?.image && urlFor(pinDetail.image).width(500).url()}
             alt="user-post"
-            style={{ borderRadius: "32px" }}
+            style={{ borderRadius: "32px", maxWidth: "100%" }}
           />
         </Box>
       </Grid>
@@ -234,8 +234,8 @@ const PinDetail = ({ user }) => {
             alignItems={"center"}
             marginTop={6}
           >
-            <RouterLink to={`/user-profile/${user._id}`}>
-              <Avatar alt="user-profile" src={user.image} />
+            <RouterLink to={`/user-profile/${user?._id}`}>
+              <Avatar alt="user-profile" src={user?.image} />
             </RouterLink>
             <TextField
               multiline

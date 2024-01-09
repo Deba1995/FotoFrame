@@ -115,7 +115,11 @@ const Home = () => {
 
       {/* For larger screens */}
       <Hidden mdDown>
-        <Container maxWidth="xl" sx={{ padding: 2 }}>
+        <Container
+          maxWidth="xl"
+          sx={{ paddingTop: 2, paddingLeft: 2 }}
+          disableGutters
+        >
           <Grid container spacing={2}>
             {/* Left section with sidebar */}
             <Grid
