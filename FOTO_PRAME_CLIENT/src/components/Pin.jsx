@@ -6,7 +6,6 @@ import {
   Typography,
   IconButton,
   Avatar,
-  CardMedia,
   Tooltip,
   Badge,
 } from "@mui/material";
@@ -18,8 +17,9 @@ import * as jwtDecode from "jwt-decode";
 import { fetchUser } from "../utils/fetchUser";
 import DownloadForOffline from "@mui/icons-material/DownloadForOffline";
 
-const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
+const Pin = ({ pin: { postedBy, image, _id, save }, onLoad }) => {
   const [postHovered, setPostHovered] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
   const user = fetchUser();
   const decodedToken = jwtDecode.jwtDecode(user);
@@ -53,12 +53,14 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
       window.location.reload();
     });
   };
+
   return (
     <>
       <Box
         position="relative"
-        maxWidth="350px"
-        height="auto"
+        marginTop={1.7}
+        marginLeft={0.7}
+        maxHeight={"100%"}
         sx={{
           borderRadius: "10px",
           cursor: postHovered ? "zoom-in" : "pointer",
@@ -71,12 +73,34 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         onClick={() => navigate(`/pin-detail/${_id}`)}
       >
         {/* Pin Image */}
-        <CardMedia
-          component="img"
-          height="auto"
-          image={urlFor(image).width(500).format("webp").url()}
+        {!loaded && (
+          <Box
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              background: "#f0f0f0", // Placeholder background color
+            }}
+          >
+            Loading...
+          </Box>
+        )}
+        <img
+          src={urlFor(image).width(350).url()}
           alt="user-post"
-          style={{ objectFit: "cover", borderRadius: "10px" }}
+          style={{
+            objectFit: "cover",
+            borderRadius: "10px",
+            width: "100%",
+            display: "block",
+          }}
+          onLoad={() => setLoaded(true)}
+          loading="lazy"
         />
         {/* Download Image */}
         <Tooltip title="Download">
