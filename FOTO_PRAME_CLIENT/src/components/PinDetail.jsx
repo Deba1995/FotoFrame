@@ -274,7 +274,7 @@ const PinDetail = ({ user }) => {
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         {pins?.length > 0 ? (
-          <>
+          <Box padding={2}>
             <Box
               marginTop={3}
               display={"flex"}
@@ -291,7 +291,7 @@ const PinDetail = ({ user }) => {
               </Typography>
             </Box>
             <MasonryLayout pins={pins} />
-          </>
+          </Box>
         ) : (
           <Spinner message="Loading more pins..." />
         )}
