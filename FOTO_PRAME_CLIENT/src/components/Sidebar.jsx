@@ -3,7 +3,9 @@ import { NavLink, Link } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import HomeIcon from "@mui/icons-material/Home";
 import { categories } from "../utils/data";
+import { useState } from "react";
 const Sidebar = ({ handleSidebarClose, user }) => {
+  const [loaded, setLoaded] = useState(false);
   const activeStyle = {
     color: "red", // Change this to your desired active color
     textDecoration: "none",
@@ -65,7 +67,27 @@ const Sidebar = ({ handleSidebarClose, user }) => {
             onClick={handleSidebarClose}
             key={category.name}
           >
-            <Avatar alt="profile-logo" src={category?.image} />
+            {!loaded && (
+              <Box
+                sx={{
+                  width: "50px",
+                  height: "50px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  background: "#f0f0f0", // Placeholder background color
+                }}
+              >
+                Loading...
+              </Box>
+            )}
+            <img
+              alt="category-logo"
+              src={category?.image}
+              style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+              onLoad={() => setLoaded(true)}
+              loading="lazy"
+            />
             <Typography variant="body1">{category.name}</Typography>
           </NavLink>
         ))}

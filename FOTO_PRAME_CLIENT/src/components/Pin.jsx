@@ -75,7 +75,7 @@ const Pin = ({ pin: { postedBy, image, _id, save }, onLoad }) => {
         {/* Pin Image */}
         {!loaded && (
           <Box
-            style={{
+            sx={{
               position: "absolute",
               top: 0,
               left: 0,
