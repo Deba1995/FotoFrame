@@ -18,7 +18,7 @@ import { fetchUser } from "../utils/fetchUser";
 const Home = () => {
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
-
+  const [loaded, setLoaded] = useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -146,7 +146,27 @@ const Home = () => {
               >
                 {/* Your logo and other content */}
                 <Link to="/" onClick={handleDrawerClose}>
-                  <img src={logo} alt="logo" style={{ width: "150px" }} />
+                  {!loaded && (
+                    <Box
+                      sx={{
+                        width: "50px",
+                        height: "50px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        background: "#f0f0f0", // Placeholder background color
+                      }}
+                    >
+                      Loading...
+                    </Box>
+                  )}
+                  <img
+                    src={logo}
+                    alt="logo"
+                    style={{ width: "150px" }}
+                    onLoad={() => setLoaded(true)}
+                    loading="lazy"
+                  />
                 </Link>
 
                 <Sidebar user={user && user} />

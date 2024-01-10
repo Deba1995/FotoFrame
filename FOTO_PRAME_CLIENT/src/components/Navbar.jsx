@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Hidden from "@mui/material/Hidden";
 import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
@@ -13,7 +13,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();
-
+  const [loaded, setLoaded] = useState(false);
   if (!user) return null;
   return (
     <>
@@ -45,7 +45,27 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
         <Hidden mdDown>
           <Tooltip title="Profile">
             <Link to={`user-profile/${user?._id}`}>
-              <Avatar alt="profile-logo" src={user?.image} />
+              {!loaded && (
+                <Box
+                  sx={{
+                    width: "50px",
+                    height: "50px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    background: "#f0f0f0", // Placeholder background color
+                  }}
+                >
+                  Loading...
+                </Box>
+              )}
+              <img
+                alt="profile-logo"
+                src={user?.image}
+                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                onLoad={() => setLoaded(true)}
+                loading="lazy"
+              />
             </Link>
           </Tooltip>
         </Hidden>

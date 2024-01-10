@@ -106,10 +106,26 @@ const Sidebar = ({ handleSidebarClose, user }) => {
               }}
               onClick={handleSidebarClose}
             >
+              {!loaded && (
+                <Box
+                  sx={{
+                    width: "50px",
+                    height: "50px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    background: "#f0f0f0", // Placeholder background color
+                  }}
+                >
+                  Loading...
+                </Box>
+              )}
               <img
                 src={user?.image}
                 alt="user-profile"
                 style={{ height: "50px", width: "50px", borderRadius: "50%" }}
+                onLoad={() => setLoaded(true)}
+                loading="lazy"
               />
               <Typography variant="caption">{user?.userName}</Typography>
               <ArrowForwardIosIcon sx={{ color: "#000" }} />

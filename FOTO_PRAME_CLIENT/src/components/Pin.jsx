@@ -60,7 +60,6 @@ const Pin = ({ pin: { postedBy, image, _id, save }, onLoad }) => {
         position="relative"
         marginTop={1.7}
         marginLeft={0.7}
-        maxHeight={"100%"}
         sx={{
           borderRadius: "10px",
           cursor: postHovered ? "zoom-in" : "pointer",
