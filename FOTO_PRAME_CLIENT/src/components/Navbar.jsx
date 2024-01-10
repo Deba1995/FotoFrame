@@ -3,13 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Hidden from "@mui/material/Hidden";
 import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
 import Tooltip from "@mui/material/Tooltip";
-import {
-  Avatar,
-  TextField,
-  InputAdornment,
-  Box,
-  IconButton,
-} from "@mui/material";
+import { TextField, InputAdornment, Box, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();
@@ -53,11 +47,9 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    background: "#f0f0f0", // Placeholder background color
+                    // Placeholder background color
                   }}
-                >
-                  Loading...
-                </Box>
+                ></Box>
               )}
               <img
                 alt="profile-logo"

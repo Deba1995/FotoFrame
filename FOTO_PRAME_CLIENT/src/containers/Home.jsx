@@ -137,7 +137,7 @@ const Home = () => {
       <Hidden mdDown>
         <Container
           maxWidth="xl"
-          sx={{ paddingTop: 2, paddingLeft: 2 }}
+          sx={{ paddingTop: 2, paddingLeft: 2, paddingRight: 2 }}
           disableGutters
         >
           <Grid container spacing={2}>

@@ -84,6 +84,7 @@ const PinDetail = ({ user }) => {
             src={pinDetail?.image && urlFor(pinDetail.image).url()}
             alt="user-post"
             style={{ borderRadius: "32px", maxWidth: "100%", height: "auto" }}
+            loading="lazy"
           />
         </Box>
       </Grid>

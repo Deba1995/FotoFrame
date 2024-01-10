@@ -18,6 +18,7 @@ import {
   Typography,
   IconButton,
   Button,
+  Tooltip,
 } from "@mui/material";
 const randomImage = "https://source.unsplash.com/1600x900/?photography";
 const UserProfile = () => {
@@ -70,19 +71,21 @@ const UserProfile = () => {
               sx={{ position: "absolute", bottom: -30, height: 80, width: 80 }}
             />
           </Box>
-          <IconButton
-            aria-label="send"
-            size="large"
-            onClick={handleLogout}
-            sx={{
-              position: "absolute",
-              top: 2,
-              right: 2,
-              backgroundColor: "white",
-            }}
-          >
-            <PowerSettingsNewIcon />
-          </IconButton>
+          <Tooltip title="Logout">
+            <IconButton
+              aria-label="send"
+              size="large"
+              onClick={handleLogout}
+              sx={{
+                position: "absolute",
+                top: 2,
+                right: 2,
+                backgroundColor: "white",
+              }}
+            >
+              <PowerSettingsNewIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

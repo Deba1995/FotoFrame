@@ -117,7 +117,7 @@ const Sidebar = ({ handleSidebarClose, user }) => {
                     background: "#f0f0f0", // Placeholder background color
                   }}
                 >
-                  Loading...
+                  ...
                 </Box>
               )}
               <img
