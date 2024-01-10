@@ -103,7 +103,27 @@ const Home = () => {
             }}
           >
             <Link to="/" onClick={handleDrawerClose}>
-              <img src={logo} alt="logo" style={{ width: "150px" }} />
+              {!loaded && (
+                <Box
+                  sx={{
+                    width: "50px",
+                    height: "50px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    background: "#f0f0f0", // Placeholder background color
+                  }}
+                >
+                  Loading...
+                </Box>
+              )}
+              <img
+                src={logo}
+                alt="logo"
+                style={{ width: "150px" }}
+                onLoad={() => setLoaded(true)}
+                loading="lazy"
+              />
             </Link>
             <IconButton onClick={handleDrawerClose}>
               <CloseIcon />
