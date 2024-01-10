@@ -3,9 +3,11 @@ import { NavLink, Link } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import HomeIcon from "@mui/icons-material/Home";
 import { categories } from "../utils/data";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../App";
 const Sidebar = ({ handleSidebarClose, user }) => {
   const [loaded, setLoaded] = useState(false);
+  const { currentTheme } = useContext(ThemeContext);
   const activeStyle = {
     color: "red", // Change this to your desired active color
     textDecoration: "none",
@@ -102,7 +104,6 @@ const Sidebar = ({ handleSidebarClose, user }) => {
                 marginBottom: "3px",
                 gap: "8px",
                 textDecoration: "none",
-                background: "white",
               }}
               onClick={handleSidebarClose}
             >
@@ -114,7 +115,6 @@ const Sidebar = ({ handleSidebarClose, user }) => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    background: "#f0f0f0", // Placeholder background color
                   }}
                 >
                   ...
@@ -127,8 +127,14 @@ const Sidebar = ({ handleSidebarClose, user }) => {
                 onLoad={() => setLoaded(true)}
                 loading="lazy"
               />
-              <Typography variant="caption">{user?.userName}</Typography>
-              <ArrowForwardIosIcon sx={{ color: "#000" }} />
+              <Typography variant="h2">{user?.userName}</Typography>
+              <ArrowForwardIosIcon
+                sx={
+                  currentTheme.name === "light"
+                    ? { color: "#000" }
+                    : { color: "#fff" }
+                }
+              />
             </Link>
           )}
         </Box>

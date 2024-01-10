@@ -41,7 +41,7 @@ const Feed = () => {
       </Typography>
     );
 
-  return <Box padding={4}>{pins && <MasonryLayout pins={pins} />}</Box>;
+  return <Box>{pins && <MasonryLayout pins={pins} />}</Box>;
 };
 
 export default Feed;

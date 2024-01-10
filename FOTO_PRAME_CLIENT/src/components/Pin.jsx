@@ -63,9 +63,7 @@ const Pin = ({ pin: { postedBy, image, _id, save }, onLoad }) => {
         sx={{
           borderRadius: "10px",
           cursor: postHovered ? "zoom-in" : "pointer",
-          transition: "transform .5s, box-shadow 1s",
-          transform: postHovered ? "scale(1.02)" : "none",
-          boxShadow: postHovered ? "0 10px 10px rgba(0,0,0,.7)" : "none",
+          overflow: "hidden",
         }}
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
@@ -83,7 +81,7 @@ const Pin = ({ pin: { postedBy, image, _id, save }, onLoad }) => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              background: "#f0f0f0", // Placeholder background color
+              background: "#000",
             }}
           >
             Loading...
@@ -97,6 +95,9 @@ const Pin = ({ pin: { postedBy, image, _id, save }, onLoad }) => {
             borderRadius: "10px",
             width: "100%",
             display: "block",
+            transition: "transform .5s", // Add transition here
+            transform: postHovered ? "scale(1.02)" : "none",
+            transformOrigin: "center",
           }}
           onLoad={() => setLoaded(true)}
           loading="lazy"

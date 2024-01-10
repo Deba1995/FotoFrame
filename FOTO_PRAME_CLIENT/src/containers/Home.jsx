@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box, Container, Grid, Hidden } from "@mui/material";
 import { Link, Route, Routes } from "react-router-dom";
 import { Sidebar, UserProfile } from "../components";
@@ -12,13 +12,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import Avatar from "@mui/material/Avatar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
+import { ThemeContext } from "../App";
 import CssBaseline from "@mui/material/CssBaseline";
 import { fetchUser } from "../utils/fetchUser";
-
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 const Home = () => {
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const { toggleTheme, currentTheme } = useContext(ThemeContext);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -64,14 +68,38 @@ const Home = () => {
               aria-label="menu"
               onClick={handleDrawerOpen}
             >
-              <MenuIcon sx={{ fontSize: 40, color: "#000" }} />
+              <MenuIcon
+                sx={
+                  currentTheme.name === "light"
+                    ? { fontSize: 40, color: "#000" }
+                    : { fontSize: 40, color: "#fff" }
+                }
+              />
             </IconButton>
             <Link to="/">
               <img src={logo} alt="logo" style={{ width: "150px" }} />
             </Link>
-            <Link to={`user-profile/${user?._id}`} style={{ width: "60px" }}>
-              <Avatar alt="profile-logo" src={user?.image} />
-            </Link>
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              <IconButton
+                color="error"
+                aria-label="toggle-theme"
+                onClick={toggleTheme}
+                size="large"
+              >
+                {currentTheme.name === "light" ? (
+                  <LightModeIcon />
+                ) : (
+                  <DarkModeIcon />
+                )}
+              </IconButton>
+              <Link to={`user-profile/${user?._id}`} style={{ width: "60px" }}>
+                <Avatar alt="profile-logo" src={user?.image} />
+              </Link>
+            </Box>
           </Box>
 
           {/* Mobile content */}
@@ -135,12 +163,8 @@ const Home = () => {
 
       {/* For larger screens */}
       <Hidden mdDown>
-        <Container
-          maxWidth="xl"
-          sx={{ paddingTop: 2, paddingLeft: 2, paddingRight: 2 }}
-          disableGutters
-        >
-          <Grid container spacing={2}>
+        <Container maxWidth="xl" disableGutters>
+          <Grid container spacing={0}>
             {/* Left section with sidebar */}
             <Grid
               item
@@ -149,6 +173,7 @@ const Home = () => {
               md={3}
               lg={3}
               xl={2}
+              padding={2}
               sx={{
                 boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
                 position: "sticky",
@@ -174,7 +199,7 @@ const Home = () => {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        background: "#f0f0f0", // Placeholder background color
+                        background: "#f0f0f0",
                       }}
                     >
                       Loading...
@@ -194,7 +219,7 @@ const Home = () => {
             </Grid>
 
             {/* Right section with masonry layout */}
-            <Grid item xs={12} sm={8} md={9} lg={9} xl={10}>
+            <Grid item xs={12} sm={8} md={9} lg={9} xl={10} padding={2}>
               <Box>
                 <Routes>
                   <Route

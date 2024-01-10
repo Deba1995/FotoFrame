@@ -15,7 +15,6 @@ import {
 import { client } from "../client";
 import Spinner from "./Spinner";
 import { categories } from "../utils/data";
-import { grey } from "@mui/material/colors";
 
 const CreatePin = ({ user }) => {
   const [title, setTitle] = useState("");
@@ -212,7 +211,6 @@ const CreatePin = ({ user }) => {
                     gap: "18px",
                     padding: "2px",
                     textDecoration: "none",
-                    background: "white",
                   }}
                 >
                   <img

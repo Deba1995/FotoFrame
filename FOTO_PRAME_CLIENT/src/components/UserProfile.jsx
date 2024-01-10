@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CardMedia from "@mui/material/CardMedia";
 import { googleLogout } from "@react-oauth/google";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import { ThemeContext } from "../App";
 import {
   userCreatedPinsQuery,
   userQuery,
@@ -28,7 +29,7 @@ const UserProfile = () => {
   const [activeBtn, setActiveBtn] = useState("created");
   const navigate = useNavigate();
   const { userId } = useParams();
-
+  const { currentTheme } = useContext(ThemeContext);
   useEffect(() => {
     const query = userQuery(userId);
     client.fetch(query).then((data) => {
@@ -80,10 +81,11 @@ const UserProfile = () => {
                 position: "absolute",
                 top: 2,
                 right: 2,
-                backgroundColor: "white",
+                backgroundColor:
+                  currentTheme.name === "light" ? "white" : "black",
               }}
             >
-              <PowerSettingsNewIcon />
+              <PowerSettingsNewIcon color="error" />
             </IconButton>
           </Tooltip>
         </Box>
@@ -147,7 +149,9 @@ const UserProfile = () => {
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         {pins?.length ? (
-          <MasonryLayout pins={pins} />
+          <Box padding={2}>
+            <MasonryLayout pins={pins} />
+          </Box>
         ) : (
           <Typography
             variant="caption"

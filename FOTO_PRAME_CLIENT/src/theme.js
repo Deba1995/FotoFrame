@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 
 const lightTheme = createTheme({
+  name: "light",
   typography: {
     fontFamily: ["'Roboto', 'Open Sans', sans-serif"].join(","),
     h1: {
@@ -54,6 +55,7 @@ const lightTheme = createTheme({
 });
 
 const darkTheme = createTheme({
+  name: "dark",
   typography: {
     fontFamily: ["'Roboto', 'Open Sans', sans-serif"].join(","),
     h1: {

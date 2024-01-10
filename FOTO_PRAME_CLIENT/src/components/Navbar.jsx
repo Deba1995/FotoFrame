@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Hidden from "@mui/material/Hidden";
 import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import { TextField, InputAdornment, Box, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { ThemeContext } from "../App";
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
+  const { toggleTheme, currentTheme } = useContext(ThemeContext);
   if (!user) return null;
   return (
     <>
@@ -37,6 +41,21 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
       </Box>
       <Box display={"flex"} gap={"8px"} alignItems={"center"}>
         <Hidden mdDown>
+          <Tooltip title="Toggle">
+            <IconButton
+              color="error"
+              aria-label="toggle-theme"
+              onClick={toggleTheme}
+              size="large"
+            >
+              {currentTheme.name === "light" ? (
+                <LightModeIcon />
+              ) : (
+                <DarkModeIcon />
+              )}
+            </IconButton>
+          </Tooltip>
+
           <Tooltip title="Profile">
             <Link to={`user-profile/${user?._id}`}>
               {!loaded && (
@@ -47,7 +66,6 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    // Placeholder background color
                   }}
                 ></Box>
               )}
@@ -65,10 +83,17 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
           <Tooltip title="Add a pin">
             <IconButton color="inherit" aria-label="menu">
               <AddToPhotosOutlinedIcon
-                sx={{
-                  color: "black",
-                  fontSize: 32,
-                }}
+                sx={
+                  currentTheme.name === "light"
+                    ? {
+                        color: "black",
+                        fontSize: 32,
+                      }
+                    : {
+                        color: "white",
+                        fontSize: 32,
+                      }
+                }
               />
             </IconButton>
           </Tooltip>
