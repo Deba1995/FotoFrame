@@ -84,7 +84,6 @@ const PinDetail = ({ user }) => {
             src={pinDetail?.image && urlFor(pinDetail.image).url()}
             alt="user-post"
             style={{ borderRadius: "32px", maxWidth: "100%", height: "auto" }}
-            loading="lazy"
           />
         </Box>
       </Grid>
@@ -275,25 +274,24 @@ const PinDetail = ({ user }) => {
       </Grid>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         {pins?.length > 0 ? (
-          <Box
-            display={"flex"}
-            flexDirection={"column"}
-            marginTop={5}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            sx={{ textAlign: "center" }}
-            gap={5}
-          >
-            <Typography
-              variant="caption"
-              fontWeight="semiBold"
-              textTransform={"capitalize"}
-              fontSize={18}
+          <>
+            <Box
+              marginTop={3}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
             >
-              More like this
-            </Typography>
+              <Typography
+                variant="caption"
+                fontWeight="semiBold"
+                textTransform={"capitalize"}
+                fontSize={18}
+              >
+                More like this
+              </Typography>
+            </Box>
             <MasonryLayout pins={pins} />
-          </Box>
+          </>
         ) : (
           <Spinner message="Loading more pins..." />
         )}
