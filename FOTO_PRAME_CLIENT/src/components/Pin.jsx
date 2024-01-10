@@ -58,8 +58,7 @@ const Pin = ({ pin: { postedBy, image, _id, save }, onLoad }) => {
     <>
       <Box
         position="relative"
-        marginTop={1.7}
-        marginLeft={0.7}
+        margin={1}
         sx={{
           borderRadius: "10px",
           cursor: postHovered ? "zoom-in" : "pointer",

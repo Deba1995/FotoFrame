@@ -4,5 +4,4 @@
   display: -ms-flexbox; /* Not needed if autoprefixing */
   display: flex;
   /* gutter size offset */
-  width: auto;
 }

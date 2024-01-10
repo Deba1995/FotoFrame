@@ -77,7 +77,7 @@ const PinDetail = ({ user }) => {
           display={"flex"}
           justifyContent={"center"}
           alignItems={"center"}
-          padding={5}
+          padding={2}
           maxWidth={"100%"}
         >
           <img
