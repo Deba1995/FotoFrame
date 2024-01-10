@@ -102,135 +102,141 @@ const Pin = ({ pin: { postedBy, image, _id, save }, onLoad }) => {
           onLoad={() => setLoaded(true)}
           loading="lazy"
         />
-        {/* Download Image */}
-        <Tooltip title="Download">
-          <IconButton
-            href={`${image?.asset?.url}?dl=`}
-            aria-label="download"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              opacity: 0.7,
-              transition: "opacity 0.3s ease",
-              ":hover": {
-                opacity: 1,
-              },
-            }}
-          >
-            <DownloadForOffline color="error" fontSize="large" />
-          </IconButton>
-        </Tooltip>
-        {/* Save Image */}
-        {alreadySaved ? (
-          <Tooltip title="Pinned">
-            <IconButton
+        {loaded && (
+          <>
+            {/* Download Image */}
+            <Tooltip title="Download">
+              <IconButton
+                href={`${image?.asset?.url}?dl=`}
+                aria-label="download"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  opacity: 0.7,
+                  transition: "opacity 0.3s ease",
+                  ":hover": {
+                    opacity: 1,
+                  },
+                }}
+              >
+                <DownloadForOffline color="error" fontSize="large" />
+              </IconButton>
+            </Tooltip>
+            {/* Save Image */}
+            {alreadySaved ? (
+              <Tooltip title="Pinned">
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  aria-label="saved"
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
+                    opacity: 0.7,
+                    transition: "opacity 0.3s ease",
+                    ":hover": {
+                      opacity: 1,
+                    },
+                  }}
+                >
+                  <Badge badgeContent={save?.length} color="error">
+                    <PushPinIcon color="error" fontSize="large" />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Tooltip title="Pin">
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    savePin(_id);
+                  }}
+                  aria-label="save"
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
+                    opacity: 0.7,
+                    transition: "opacity 0.3s ease",
+                    ":hover": {
+                      opacity: 1,
+                    },
+                  }}
+                >
+                  <PushPinIcon color="error" fontSize="large" />
+                </IconButton>
+              </Tooltip>
+            )}
+
+            {/* Profile Link */}
+            <RouterLink
+              to={`/user-profile/${postedBy?._id}`}
+              style={{
+                textDecoration: "none",
+              }}
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              aria-label="saved"
-              sx={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                opacity: 0.7,
-                transition: "opacity 0.3s ease",
-                ":hover": {
-                  opacity: 1,
-                },
-              }}
             >
-              <Badge badgeContent={save?.length} color="error">
-                <PushPinIcon color="error" fontSize="large" />
-              </Badge>
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Pin">
-            <IconButton
-              onClick={(e) => {
-                e.stopPropagation();
-                savePin(_id);
-              }}
-              aria-label="save"
-              sx={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                opacity: 0.7,
-                transition: "opacity 0.3s ease",
-                ":hover": {
-                  opacity: 1,
-                },
-              }}
-            >
-              <PushPinIcon color="error" fontSize="large" />
-            </IconButton>
-          </Tooltip>
-        )}
-        {/* Profile Link */}
-        <RouterLink
-          to={`/user-profile/${postedBy?._id}`}
-          style={{
-            textDecoration: "none",
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            gap={2}
-            sx={{
-              position: "absolute",
-              bottom: 2,
-              left: 2,
-              borderRadius: "10px",
-            }}
-          >
-            <Avatar alt="user-profile" src={postedBy?.image} />
-            <Typography
-              variant="caption"
-              fontWeight="semiBold"
-              color={"#fff"}
-              sx={{
-                wordWrap: "break-word", // Add this line
-                overflowWrap: "break-word",
-                textTransform: "capitalize",
-              }}
-            >
-              {postedBy?.userName}
-            </Typography>
-          </Box>
-        </RouterLink>
-        {/* Remove Icon */}
-        {postedBy?._id === sub && (
-          <Tooltip title="Remove">
-            <IconButton
-              onClick={(e) => {
-                e.stopPropagation();
-                deletePin(_id);
-              }}
-              aria-label="save"
-              sx={{
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                opacity: 0.7,
-                transition: "opacity 0.3s ease",
-                ":hover": {
-                  opacity: 1,
-                },
-              }}
-            >
-              <DeleteIcon color="error" fontSize="large" />
-            </IconButton>
-          </Tooltip>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                gap={2}
+                sx={{
+                  position: "absolute",
+                  bottom: 2,
+                  left: 2,
+                  borderRadius: "10px",
+                }}
+              >
+                <Avatar alt="user-profile" src={postedBy?.image} />
+                <Typography
+                  variant="caption"
+                  fontWeight="semiBold"
+                  color={"#fff"}
+                  sx={{
+                    wordWrap: "break-word", // Add this line
+                    overflowWrap: "break-word",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {postedBy?.userName}
+                </Typography>
+              </Box>
+            </RouterLink>
+
+            {/* Remove Icon */}
+            {postedBy?._id === sub && (
+              <Tooltip title="Remove">
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deletePin(_id);
+                  }}
+                  aria-label="save"
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    right: 0,
+                    opacity: 0.7,
+                    transition: "opacity 0.3s ease",
+                    ":hover": {
+                      opacity: 1,
+                    },
+                  }}
+                >
+                  <DeleteIcon color="error" fontSize="large" />
+                </IconButton>
+              </Tooltip>
+            )}
+          </>
         )}
       </Box>
     </>
