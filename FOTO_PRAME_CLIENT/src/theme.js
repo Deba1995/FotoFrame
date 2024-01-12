@@ -24,6 +24,12 @@ const lightTheme = createTheme({
   },
   palette: {
     mode: "light",
+    background: {
+      default: "#f5f5f5",
+    },
+    color: {
+      default: "#121212",
+    },
   },
   components: {
     MuiCssBaseline: {
@@ -33,7 +39,7 @@ const lightTheme = createTheme({
           padding: 0;
         }
         *::-webkit-scrollbar {
-          width: 10px;
+          display: none; /* Hide the scrollbar */
         }
         *::-webkit-scrollbar-track {
           background: #f1f1f1;
@@ -78,6 +84,12 @@ const darkTheme = createTheme({
   },
   palette: {
     mode: "dark",
+    background: {
+      default: "#121212",
+    },
+    color: {
+      default: "#f5f5f5",
+    },
   },
   components: {
     MuiCssBaseline: {
@@ -87,7 +99,7 @@ const darkTheme = createTheme({
           padding: 0;
         }
         *::-webkit-scrollbar {
-          width: 10px;
+          display: none;
         }
         *::-webkit-scrollbar-track {
           background: #f1f1f1;

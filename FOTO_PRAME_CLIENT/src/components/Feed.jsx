@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { client } from "../client";
 import MasonryLayout from "./MasonryLayout";
+import MasonrySkeleton from "./MasonrySkeleton.jsx";
 import { Box, Typography } from "@mui/material";
 import Spinner from "./Spinner.jsx";
 import { feedQuery, searchQuery } from "../utils/data.js";
@@ -27,7 +28,12 @@ const Feed = () => {
   }, [categoryId]);
 
   if (loading)
-    return <Spinner message="We are adding new ideas to your feed!" />;
+    return (
+      <>
+        <Spinner message="We are adding new ideas to your feed!" />
+        <MasonrySkeleton />
+      </>
+    );
 
   if (!pins?.length)
     return (
@@ -41,11 +47,7 @@ const Feed = () => {
       </Typography>
     );
 
-  return (
-    <Box padding={2} width={"100%"}>
-      {pins && <MasonryLayout pins={pins} />}
-    </Box>
-  );
+  return pins && <MasonryLayout pins={pins} />;
 };
 
 export default Feed;

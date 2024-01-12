@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
+import { Sidebar } from "../components";
 import { Navbar, Feed, PinDetail, CreatePin, Search } from "../components";
 const Pins = ({ user }) => {
   const [searchTerm, setSearchTerm] = useState("");
   return (
     <Grid container>
+      <Grid item xs={12} md={12} lg={12} padding={4}>
+        <Navbar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          user={user}
+        />
+      </Grid>
+
       <Grid
         item
         xs={12}
@@ -15,11 +24,9 @@ const Pins = ({ user }) => {
         alignItems={"center"}
         justifyContent={"space-evenly"}
       >
-        <Navbar
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          user={user}
-        />
+        <Box mt={3} mb={3} style={{ overflowX: "auto" }}>
+          <Sidebar />
+        </Box>
       </Grid>
 
       <Grid item xs={12} lg={12}>

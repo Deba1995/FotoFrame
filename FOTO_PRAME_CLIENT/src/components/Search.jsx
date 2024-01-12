@@ -25,7 +25,7 @@ const Search = ({ searchTerm }) => {
   }, [searchTerm]);
 
   return (
-    <Box padding={4}>
+    <>
       {loading && <Spinner message="Searching for pins..." />}
       {pins?.length > 0 && <MasonryLayout pins={pins} />}
       {pins?.length === 0 && searchTerm !== "" && !loading && (
@@ -40,7 +40,7 @@ const Search = ({ searchTerm }) => {
           </Typography>
         </Box>
       )}
-    </Box>
+    </>
   );
 };
 

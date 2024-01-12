@@ -12,6 +12,7 @@ export const ThemeContext = createContext();
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
+  // Function to change current theme
   const toggleTheme = () => {
     if (currentTheme.name === "light") {
       setCurrentTheme(darkTheme);
@@ -22,6 +23,8 @@ function App() {
     }
   };
   const navigate = useNavigate();
+
+  // Fetching user set theme mode from local storage
   useEffect(() => {
     const savedTheme = localStorage.getItem("fotoprame-mode");
     if (savedTheme) {
@@ -30,10 +33,17 @@ function App() {
       }
     }
   }, []);
+
+  // Fetching user information from local storage
   useEffect(() => {
-    const user = fetchUser();
-    if (!user) navigate("/login");
+    try {
+      const user = fetchUser();
+      if (!user) navigate("/login");
+    } catch (error) {
+      console.error("Error fetching user", error);
+    }
   }, []);
+
   return (
     <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
       <ThemeProvider theme={currentTheme}>

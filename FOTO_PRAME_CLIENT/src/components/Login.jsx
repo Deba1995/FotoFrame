@@ -3,11 +3,38 @@ import * as jwtDecode from "jwt-decode";
 import { Box } from "@mui/material";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Container from "@mui/material/Container";
-import shareVideo from "../assets/loginvideo.mp4";
-import logo from "../assets/logowhite.png";
+import Snackbar from "@mui/material/Snackbar";
+import { shareVideo, logo } from "../assets";
 import { client } from "../client";
+import { useState } from "react";
 const Login = () => {
   const navigate = useNavigate();
+
+  // Managing state and function for notifications
+  const [state, setState] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+    message: "",
+  });
+  const { vertical, horizontal, open, message } = state;
+
+  const handleCloseAlert = () => {
+    setState({ ...state, open: false, message: "" });
+  };
+
+  const generateAlert = (msg) => {
+    const newState = { vertical: "top", horizontal: "right" };
+    setState({
+      ...newState,
+      open: true,
+      message: msg,
+    });
+  };
+
+  //End of notification actions
+
+  // Succesfull login function
   const loginSuccess = (credentialResponse) => {
     const decodedToken = jwtDecode.jwtDecode(credentialResponse.credential);
 
@@ -23,8 +50,17 @@ const Login = () => {
     };
 
     client.createIfNotExists(doc).then(() => {
-      navigate("/", { replace: true });
+      generateAlert("Succesfully logged in....");
+      setTimeout(() => {
+        navigate("/", { replace: true });
+      }, 1000);
     });
+  };
+
+  // Login error function
+
+  const loginError = (err) => {
+    generateAlert(`Error: ${err}`);
   };
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_API_TOKEN}>
@@ -40,6 +76,13 @@ const Login = () => {
           alignItems: "center",
         }}
       >
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={handleCloseAlert}
+          message={message}
+          key={vertical + horizontal}
+        />
         <Box sx={{ position: "relative", width: "100%" }}>
           <video
             src={shareVideo}
@@ -73,8 +116,8 @@ const Login = () => {
           <img src={logo} width={130} alt="google-login-logo" />
           <GoogleLogin
             onSuccess={(credentialResponse) => loginSuccess(credentialResponse)}
-            onError={() => {
-              console.log("Login Failed");
+            onError={(err) => {
+              loginError(err);
             }}
           />
         </Box>
