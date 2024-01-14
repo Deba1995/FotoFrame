@@ -11,12 +11,6 @@ export default defineConfig({
     minify: "terser",
     // Configure code splitting
     chunkSizeWarningLimit: 2000,
-    // Enable tree shaking
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
-    },
     // Enable cache busting
     outDir: "dist",
     assetsDir: "assets",
@@ -24,6 +18,7 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
+        manualChunks: undefined,
         entryFileNames: "[name].[hash].js",
         chunkFileNames: "[name].[hash].js",
         assetFileNames: "[name].[hash].[ext]",
