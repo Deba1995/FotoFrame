@@ -5,22 +5,27 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Add preconnect for Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <!-- Critical CSS styles inline -->
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #fff;
+        color: #333;
+        /* Add other critical styles here */
+      }
 
-    <!-- Add preconnect for Google Analytics -->
-    <link
-      rel="preconnect"
-      href="https://www.google-analytics.com"
-      crossorigin
-    />
+      /* Add your critical CSS styles here */
+    </style>
 
-    <!-- Add preconnect for Google Tag Manager -->
-    <link
-      rel="preconnect"
-      href="https://www.googletagmanager.com"
-      crossorigin
+    <title>FOTO PRAME</title>
+    <!-- Add meta description -->
+    <meta
+      name="description"
+      content="Explore a vibrant community at FOTO PRAME, where users share their moments through captivating photos. Upload and showcase your own images, discover a variety of photography styles, and engage with others through comments. Join Deba Dey and fellow photography enthusiasts in a visual journey of creativity and connection."
     />
+  </head>
+  <body>
+    <div id="root"></div>
 
     <!-- Defer loading of non-critical Open Sans font -->
     <link
@@ -36,15 +41,6 @@
       />
     </noscript>
 
-    <title>FOTO PRAME</title>
-    <!-- Add meta description -->
-    <meta
-      name="description"
-      content="Explore a vibrant community at FOTO PRAME, where users share their moments through captivating photos. Upload and showcase your own images, discover a variety of photography styles, and engage with others through comments. Join Deba Dey and fellow photography enthusiasts in a visual journey of creativity and connection."
-    />
-  </head>
-  <body>
-    <div id="root"></div>
     <script type="module" src="/src/main.jsx" defer></script>
   </body>
 </html>

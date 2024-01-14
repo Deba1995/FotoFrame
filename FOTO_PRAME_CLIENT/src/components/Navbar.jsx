@@ -26,9 +26,6 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
         variant="regular"
         sx={{ justifyContent: "space-between", gap: 2 }}
       >
-        {/* <Link to="/">
-            <img src={logoPage} alt="logo" style={{ width: "150px" }} />
-          </Link> */}
         <Link to="/">
           <Typography variant="h1" fontSize={28} letterSpacing={2}>
             FOTOPRAME
