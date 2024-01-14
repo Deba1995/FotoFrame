@@ -113,19 +113,22 @@ const Pin = ({ pin: { postedBy, image, _id, save, destination } }) => {
         key={vertical + horizontal}
       />
       {/* Pin Image */}
-      <LazyLoadImage
-        src={urlFor(image).width(350).format("webp").url()}
-        alt="user-post"
-        style={{
-          objectFit: "cover",
-          width: "100%",
-          display: "block",
-          transition: "transform .5s", // Add transition here
-          transform: postHovered ? "scale(1.02)" : "none",
-          transformOrigin: "center",
-        }}
-      />
+      <Box sx={{ width: "100%", maxHeight: "510px" }}>
+        <LazyLoadImage
+          src={urlFor(image).width(350).format("webp").url()}
+          alt="user-post"
+          width={350}
+          height={"100%"}
+          style={{
+            objectFit: "cover",
 
+            display: "block",
+            transition: "transform .5s", // Add transition here
+            transform: postHovered ? "scale(1.02)" : "none",
+            transformOrigin: "center",
+          }}
+        />
+      </Box>
       <>
         {/* Download Image */}
         <Tooltip title="Download">
