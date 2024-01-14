@@ -16,5 +16,14 @@ export default defineConfig({
     assetsDir: "assets",
     assetsInlineLimit: 4096,
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        entryFileNames: "[name].[hash].js",
+        chunkFileNames: "[name].[hash].js",
+        assetFileNames: "[name].[hash].[ext]",
+        // Add format option to generate separate module and nomodule scripts
+        format: "es",
+      },
+    },
   },
 });
