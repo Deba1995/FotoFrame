@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
 import { Hourglass } from "react-loader-spinner";
 const Spinner = ({ message }) => {
   return (

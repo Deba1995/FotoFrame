@@ -22,7 +22,10 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   if (!user) return null;
   return (
     <AppBar sx={{ padding: 2 }} color="default" elevation={0}>
-      <Toolbar variant="regular" sx={{ justifyContent: "space-between" }}>
+      <Toolbar
+        variant="regular"
+        sx={{ justifyContent: "space-between", gap: 2 }}
+      >
         {/* <Link to="/">
             <img src={logoPage} alt="logo" style={{ width: "150px" }} />
           </Link> */}
@@ -32,39 +35,29 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
           </Typography>
         </Link>
 
-        <Box
+        <TextField
+          id="search"
+          type="search"
+          onFocus={() => navigate("/search")}
+          placeholder="Search..."
+          onChange={(e) => setSearchTerm(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          fullWidth
           sx={{
-            width: "80%", // Default width for xs, sm, and md screens
-
-            // Media query for lg and xl screens
-            "@media (min-width: 1280px)": {
-              width: "60%",
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                border: "none",
+              },
             },
           }}
-        >
-          <TextField
-            id="search"
-            type="search"
-            onFocus={() => navigate("/search")}
-            placeholder="Search..."
-            onChange={(e) => setSearchTerm(e.target.value)}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            fullWidth
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  border: "none",
-                },
-              },
-            }}
-          />
-        </Box>
+        />
+
         <Box display={"flex"} gap={"8px"} alignItems={"center"}>
           <Tooltip title="Toggle">
             <IconButton

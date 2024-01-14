@@ -65,10 +65,13 @@ const UserProfile = () => {
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         <Box sx={{ position: "relative" }}>
           <LazyLoadImage
-            style={{ height: 500, width: "100%", objectFit: "cover" }}
+            style={{
+              height: 500,
+              width: "100%",
+              objectFit: "cover",
+            }}
             src={randomImage}
             alt="banner-image"
-            effect="blur"
           />
           <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
             <LazyLoadImage

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { client, urlFor } from "../client";
@@ -294,7 +294,12 @@ const PinDetail = ({ user }) => {
               bgcolor={currentTheme.palette.background.default}
             >
               <RouterLink to={`/user-profile/${user?._id}`}>
-                <Avatar alt="user-profile" src={user?.image} />
+                <LazyLoadImage
+                  alt="user-profile"
+                  effect="blur"
+                  src={user?.image}
+                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                />
               </RouterLink>
               <TextField
                 multiline

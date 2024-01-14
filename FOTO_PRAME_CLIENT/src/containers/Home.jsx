@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, lazy, Suspense } from "react";
 import {
   AppBar,
   Box,
@@ -10,18 +10,18 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, Route, Routes } from "react-router-dom";
-import { UserProfile } from "../components";
 import { client } from "../client";
 import * as jwtDecode from "jwt-decode";
 import { userQuery } from "../utils/data";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import Pins from "./Pins";
 import IconButton from "@mui/material/IconButton";
 import ThemeContext from "../context/ThemeContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import { fetchUser } from "../utils/fetchUser";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+const LazyUserProfile = lazy(() => import("../components/UserProfile"));
+const LazyPins = lazy(() => import("./Pins"));
 const Home = () => {
   const [user, setUser] = useState(null);
   const { toggleTheme, currentTheme } = useContext(ThemeContext);
@@ -138,8 +138,22 @@ const Home = () => {
           {/* Mobile content */}
 
           <Routes>
-            <Route path="/user-profile/:userId" element={<UserProfile />} />
-            <Route path="/*" element={<Pins user={user && user} />} />
+            <Route
+              path="/user-profile/:userId"
+              element={
+                <Suspense fallback="Loading...">
+                  <LazyUserProfile />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/*"
+              element={
+                <Suspense fallback="Loading...">
+                  <LazyPins user={user && user} />
+                </Suspense>
+              }
+            />
           </Routes>
         </Hidden>
       </Box>
@@ -159,8 +173,22 @@ const Home = () => {
             {/* Section with masonry layout */}
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <Routes>
-                <Route path="/user-profile/:userId" element={<UserProfile />} />
-                <Route path="/*" element={<Pins user={user && user} />} />
+                <Route
+                  path="/user-profile/:userId"
+                  element={
+                    <Suspense fallback="Loading...">
+                      <LazyUserProfile />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/*"
+                  element={
+                    <Suspense fallback="Loading...">
+                      <LazyPins user={user && user} />
+                    </Suspense>
+                  }
+                />
               </Routes>
             </Grid>
           </Grid>
