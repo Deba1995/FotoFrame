@@ -1,5 +1,3 @@
-// utils/notifications.js
-
 import { useState } from "react";
 
 const useNotification = () => {
@@ -9,8 +7,6 @@ const useNotification = () => {
     horizontal: "center",
     message: "",
   });
-
-  const { vertical, horizontal, open, message } = state;
 
   const newState = { vertical: "top", horizontal: "right" };
 

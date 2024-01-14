@@ -2,13 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
 import Tooltip from "@mui/material/Tooltip";
-import {
-  TextField,
-  InputAdornment,
-  Box,
-  IconButton,
-  Stack,
-} from "@mui/material";
+import { TextField, InputAdornment, IconButton, Stack } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ThemeContext from "../context/ThemeContext";
 

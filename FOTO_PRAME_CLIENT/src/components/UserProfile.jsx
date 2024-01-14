@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import CardMedia from "@mui/material/CardMedia";
 import { googleLogout } from "@react-oauth/google";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import WestIcon from "@mui/icons-material/West";
@@ -17,7 +16,6 @@ import MasonryLayout from "./MasonryLayout";
 import Spinner from "./Spinner";
 import {
   Grid,
-  Avatar,
   Box,
   Typography,
   IconButton,
