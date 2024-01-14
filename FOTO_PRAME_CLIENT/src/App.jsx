@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Login from "./components/Login";
-import Home from "./containers/Home";
+const LazyLogin = lazy(() => import("./components/Login"));
+const LazyHome = lazy(() => import("./containers/Home"));
 import ThemeContext from "./context/ThemeContext";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme";
@@ -46,8 +46,22 @@ function App() {
       <ThemeProvider theme={currentTheme}>
         <CssBaseline />
         <Routes>
-          <Route path="login" element={<Login />} />
-          <Route path="/*" element={<Home />} />
+          <Route
+            path="login"
+            element={
+              <Suspense fallback="Loading...">
+                <LazyLogin />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/*"
+            element={
+              <Suspense fallback="Loading...">
+                <LazyHome />{" "}
+              </Suspense>
+            }
+          />
         </Routes>
       </ThemeProvider>
     </ThemeContext.Provider>

@@ -8,7 +8,7 @@ const LazyPinDetail = lazy(() => import("../components/PinDetail"));
 const LazySearch = lazy(() => import("../components/Search"));
 import { Navbar, MobileNavbar } from "../components";
 const Pins = ({ user }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(null);
   return (
     <Grid container>
       <Grid item xs={12} md={12} lg={12} padding={4}>
