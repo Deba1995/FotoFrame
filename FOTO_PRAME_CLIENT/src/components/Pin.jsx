@@ -13,6 +13,7 @@ import {
 import PushPinIcon from "@mui/icons-material/PushPin";
 import ShareIcon from "@mui/icons-material/Share";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import { client, urlFor } from "../client";
 import DeleteIcon from "@mui/icons-material/Delete";
 import * as jwtDecode from "jwt-decode";
@@ -181,7 +182,6 @@ const Pin = ({ pin: { postedBy, image, _id, save, destination } }) => {
               effect="blur"
               src={postedBy?.image}
               style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-              loading="lazy"
             />
             <Typography
               variant="caption"
@@ -238,6 +238,19 @@ const Pin = ({ pin: { postedBy, image, _id, save, destination } }) => {
               </IconButton>
             </Tooltip>
           )}
+          {/* Comment icon */}
+          <RouterLink
+            to={`/pin-detail/${_id}`}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <Tooltip title="Comment">
+              <IconButton>
+                <ChatBubbleOutlineOutlinedIcon sx={{ color: grey[50] }} />
+              </IconButton>
+            </Tooltip>
+          </RouterLink>
           {/* Share icon */}
           <Tooltip title="Share">
             <IconButton onClick={(e) => handleShareClick(e, destination)}>
