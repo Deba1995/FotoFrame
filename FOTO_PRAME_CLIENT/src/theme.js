@@ -39,7 +39,7 @@ const lightTheme = createTheme({
           padding: 0;
         }
         *::-webkit-scrollbar {
-          display: none; /* Hide the scrollbar */
+          display: none; // Adjust the width as needed // none to hide
         }
         *::-webkit-scrollbar-track {
           background: #f1f1f1;
@@ -51,9 +51,9 @@ const lightTheme = createTheme({
           background: #555;
         }
         * {
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
-          scroll-behavior: smooth; /* Smooth scrolling */
+          -ms-overflow-style: none; // Show the scrollbar for IE and Edge  //none to hide
+          scrollbar-width: auto; // Show the scrollbar for Firefox
+          scroll-behavior: smooth; // Smooth scrolling
         }
       `,
     },
@@ -111,9 +111,9 @@ const darkTheme = createTheme({
           background: #555;
         }
         * {
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
-          scroll-behavior: smooth; /* Smooth scrolling */
+          -ms-overflow-style: none; // Show the scrollbar for IE and Edge  //none to hide
+          scrollbar-width: auto; // Show the scrollbar for Firefox
+          scroll-behavior: smooth; // Smooth scrolling
         }
       `,
     },

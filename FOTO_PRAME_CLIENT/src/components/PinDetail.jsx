@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { client, urlFor } from "../client";
@@ -6,7 +6,9 @@ import MasonryLayout from "./MasonryLayout";
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 import SendIcon from "@mui/icons-material/Send";
 import CircularProgress from "@mui/material/CircularProgress";
+import WestIcon from "@mui/icons-material/West";
 import Spinner from "./Spinner";
+import ThemeContext from "../context/ThemeContext";
 import { pinDetailMorePinQuery, pinDetailQuery } from "../utils/data";
 import {
   Box,
@@ -16,8 +18,12 @@ import {
   Avatar,
   TextField,
   IconButton,
+  Tooltip,
+  Hidden,
+  SvgIcon,
 } from "@mui/material";
 const PinDetail = ({ user }) => {
+  const { currentTheme } = useContext(ThemeContext);
   const [pins, setPins] = useState(null);
   const [pinDetail, setPinDetail] = useState(null);
   const [comment, setComment] = useState("");
@@ -72,226 +78,269 @@ const PinDetail = ({ user }) => {
 
   return (
     <Grid container>
-      <Grid item xs={12} sm={12} md={12} lg={12} xl={6}>
+      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         <Box
-          display={"flex"}
+          sx={{ display: "flex" }}
           justifyContent={"center"}
-          alignItems={"center"}
-          padding={2}
-          maxWidth={"100%"}
+          position={"relative"}
+          flexWrap={"wrap"}
         >
+          <Hidden mdDown>
+            <Box
+              sx={{
+                position: "absolute",
+                top: 18,
+                left: 50,
+              }}
+            >
+              <RouterLink to="/">
+                <Tooltip title="Back">
+                  <IconButton aria-label="back">
+                    <SvgIcon
+                      style={{
+                        stroke: currentTheme.palette.color.default,
+                        strokeWidth: 2,
+                      }}
+                    >
+                      <WestIcon />
+                    </SvgIcon>
+                  </IconButton>
+                </Tooltip>
+              </RouterLink>
+              <Hidden xlDown>
+                <Typography
+                  variant="h1"
+                  fontSize={"24px"}
+                  display={"inline-block"}
+                  ml={2}
+                >
+                  For you
+                </Typography>
+              </Hidden>
+            </Box>
+          </Hidden>
+
+          {/* Box with image left section*/}
           <img
-            src={pinDetail?.image && urlFor(pinDetail.image).url()}
+            src={pinDetail?.image && urlFor(pinDetail.image).width(510).url()}
             alt="user-post"
-            style={{ borderRadius: "32px", maxWidth: "100%", height: "auto" }}
+            style={{
+              borderTopLeftRadius: "32px",
+              borderBottomLeftRadius: "32px",
+              maxWidth: "100%",
+              height: "auto",
+            }}
           />
-        </Box>
-      </Grid>
-      <Grid item xs={12} sm={12} md={12} lg={12} xl={6}>
-        <Box
-          display={"flex"}
-          justifyContent={"center"}
-          paddingTop={10}
-          paddingLeft={3}
-          paddingRight={3}
-          flexDirection={"column"}
-          gap={"12px"}
-        >
+          {/* Box with right section*/}
           <Box
             display={"flex"}
             justifyContent={"space-between"}
-            alignItems={"center"}
+            paddingTop={2}
+            paddingLeft={3}
+            paddingRight={3}
+            flexDirection={"column"}
+            gap={"12px"}
+            width={510}
+            borderRadius="0 32px 32px 0"
+            boxShadow="5px 5px 5px rgba(0, 0, 0, 0.2)"
           >
-            <Link
-              href={`${pinDetail.image?.asset?.url}?dl=`}
-              download={true}
-              sx={{
-                borderRadius: "14px",
-                background: "white",
-                width: "30px",
-                height: "30px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                opacity: 0.75,
-                outline: "none",
-                transition: "opacity 0.3s ease",
-                ":hover": {
-                  opacity: 1,
-                  background: "white",
-                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                },
-              }}
+            {/* Box with download and link destination */}
+            <Box
+              display={"flex"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
             >
-              <DownloadForOfflineIcon style={{ color: "black" }} />
-            </Link>
-            <Link
-              href={`${pinDetail.destination}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                opacity: 0.75,
-                transition: "opacity 0.3s ease",
-                textDecoration: "none",
-                ":hover": {
-                  opacity: 1,
-                },
-              }}
-            >
-              <Typography
-                variant="caption"
-                display={"block"}
-                gutterBottom
+              <Link
+                href={`${pinDetail.image?.asset?.url}?dl=`}
+                download={true}
                 sx={{
-                  fontSize: "14px",
+                  borderRadius: "14px",
+                  background: "white",
+                  width: "30px",
+                  height: "30px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  opacity: 0.75,
+                  outline: "none",
+                  transition: "opacity 0.3s ease",
+                  ":hover": {
+                    opacity: 1,
+                    background: "white",
+                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                  },
                 }}
               >
-                {pinDetail.destination.length > 20
-                  ? pinDetail.destination.slice(8, 35)
-                  : pinDetail.destination.slice(8)}
-              </Typography>
-            </Link>
-          </Box>
-
-          <Typography
-            variant="h1"
-            display={"block"}
-            gutterBottom
-            sx={{
-              fontSize: "38px",
-              wordWrap: "break-word",
-              overflowWrap: "break-word",
-              textTransform: "capitalize",
-            }}
-          >
-            {pinDetail.title}
-          </Typography>
-
-          <Typography
-            variant="caption"
-            display={"block"}
-            gutterBottom
-            sx={{
-              fontSize: "18px",
-              wordWrap: "break-word", // Add this line
-              overflowWrap: "break-word",
-            }}
-          >
-            {pinDetail.about}
-          </Typography>
-
-          <RouterLink
-            to={`/user-profile/${pinDetail?.postedBy?._id}`}
-            style={{
-              display: "flex",
-              marginTop: "5px",
-              gap: "18px",
-              alignItems: "center",
-              textDecoration: "none",
-            }}
-          >
-            <Avatar alt="user-profile" src={pinDetail?.postedBy?.image} />
-            <Typography variant="caption" textTransform={"capitalize"}>
-              {pinDetail?.postedBy?.userName}
-            </Typography>
-          </RouterLink>
-
-          <Typography
-            variant="caption"
-            fontWeight="semiBold"
-            textTransform={"capitalize"}
-            fontSize={18}
-          >
-            Comments
-          </Typography>
-
-          <Box maxHeight={270} sx={{ overflowY: "auto" }}>
-            {pinDetail?.comments?.map((comment, i) => (
-              <Box
-                display={"flex"}
-                gap={2}
-                marginTop={5}
-                alignItems={"center"}
-                borderRadius={5}
-                key={i}
-              >
-                <Avatar alt="user-profile" src={comment.postedBy?.image} />
-                <Box display={"flex"} flexDirection={"column"}>
-                  <Typography
-                    variant="caption"
-                    textTransform={"capitalize"}
-                    fontSize={18}
-                  >
-                    {comment.postedBy.userName}
-                  </Typography>
-                  <Typography>{comment.comment}</Typography>
-                </Box>
-              </Box>
-            ))}
-          </Box>
-          <Box
-            display={"flex"}
-            flexWrap={"wrap"}
-            alignItems={"center"}
-            marginTop={6}
-          >
-            <RouterLink to={`/user-profile/${user?._id}`}>
-              <Avatar alt="user-profile" src={user?.image} />
-            </RouterLink>
-            <TextField
-              multiline
-              rows={1}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              variant="outlined"
-              placeholder="Add a comment..."
-              sx={{
-                flex: 1,
-                borderColor: "gray.100",
-                outline: "none",
-                borderWidth: 2,
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderRadius: "32px",
+                <DownloadForOfflineIcon style={{ color: "black" }} />
+              </Link>
+              <Link
+                href={`${pinDetail.destination}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  opacity: 0.75,
+                  transition: "opacity 0.3s ease",
+                  textDecoration: "none",
+                  ":hover": {
+                    opacity: 1,
                   },
-                },
-                p: 2,
-                "&:focus": {
-                  borderColor: "gray.300",
-                },
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  display={"block"}
+                  gutterBottom
+                  sx={{
+                    fontSize: "14px",
+                  }}
+                >
+                  {pinDetail.destination.length > 20
+                    ? pinDetail.destination.slice(8, 35)
+                    : pinDetail.destination.slice(8)}
+                </Typography>
+              </Link>
+            </Box>
+            {/* Image title */}
+            <Typography
+              variant="h1"
+              display={"block"}
+              gutterBottom
+              sx={{
+                fontSize: "38px",
+                wordWrap: "break-word",
+                overflowWrap: "break-word",
+                textTransform: "capitalize",
               }}
-            />
+            >
+              {pinDetail.title}
+            </Typography>
+            {/* Image about */}
+            <Typography
+              variant="caption"
+              display={"block"}
+              gutterBottom
+              sx={{
+                fontSize: "18px",
+                wordWrap: "break-word", // Add this line
+                overflowWrap: "break-word",
+              }}
+            >
+              {pinDetail.about}
+            </Typography>
+            {/* Profile link */}
+            <RouterLink
+              to={`/user-profile/${pinDetail?.postedBy?._id}`}
+              style={{
+                display: "flex",
+                marginTop: "5px",
+                gap: "18px",
+                alignItems: "center",
+                textDecoration: "none",
+              }}
+            >
+              <Avatar alt="user-profile" src={pinDetail?.postedBy?.image} />
+              <Typography variant="caption" textTransform={"capitalize"}>
+                {pinDetail?.postedBy?.userName}
+              </Typography>
+            </RouterLink>
+            {/* Comments header */}
+            <Typography
+              variant="caption"
+              fontWeight="semiBold"
+              textTransform={"capitalize"}
+              fontSize={18}
+            >
+              Comments
+            </Typography>
+            {/* Comment section */}
+            <Box sx={{ maxHeight: "300px", overflowY: "auto", flexGrow: 1 }}>
+              {pinDetail?.comments?.map((comment, i) => (
+                <Box
+                  display={"flex"}
+                  gap={2}
+                  marginTop={5}
+                  alignItems={"center"}
+                  borderRadius={5}
+                  key={i}
+                >
+                  <Avatar alt="user-profile" src={comment.postedBy?.image} />
+                  <Box display={"flex"} flexDirection={"column"}>
+                    <Typography
+                      variant="caption"
+                      textTransform={"capitalize"}
+                      fontSize={18}
+                    >
+                      {comment.postedBy.userName}
+                    </Typography>
+                    <Typography>{comment.comment}</Typography>
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+            {/* User profile and add comment */}
+            <Box
+              display={"flex"}
+              flexWrap={"wrap"}
+              alignItems={"center"}
+              marginTop={6}
+              position={"sticky"}
+              bottom={0}
+              bgcolor={currentTheme.palette.background.default}
+            >
+              <RouterLink to={`/user-profile/${user?._id}`}>
+                <Avatar alt="user-profile" src={user?.image} />
+              </RouterLink>
+              <TextField
+                multiline
+                rows={1}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                variant="outlined"
+                placeholder="Add a comment..."
+                sx={{
+                  flex: 1,
+                  borderColor: "gray.100",
+                  outline: "none",
+                  borderWidth: 2,
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderRadius: "32px",
+                    },
+                  },
+                  p: 2,
+                  "&:focus": {
+                    borderColor: "gray.300",
+                  },
+                }}
+              />
 
-            <IconButton aria-label="send" size="large" onClick={addComment}>
-              {addingComment ? (
-                <CircularProgress />
-              ) : (
-                <SendIcon fontSize="large" />
-              )}
-            </IconButton>
+              <IconButton aria-label="send" size="large" onClick={addComment}>
+                {addingComment ? (
+                  <CircularProgress />
+                ) : (
+                  <SendIcon fontSize="large" />
+                )}
+              </IconButton>
+            </Box>
           </Box>
         </Box>
       </Grid>
+
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         {pins?.length > 0 ? (
-          <Box padding={2}>
+          <>
             <Box
               marginTop={3}
               display={"flex"}
               justifyContent={"center"}
               alignItems={"center"}
             >
-              <Typography
-                variant="caption"
-                fontWeight="semiBold"
-                textTransform={"capitalize"}
-                fontSize={18}
-              >
-                More like this
+              <Typography variant="caption" fontWeight="semiBold" fontSize={18}>
+                More to explore
               </Typography>
             </Box>
             <MasonryLayout pins={pins} />
-          </Box>
+          </>
         ) : (
           <Spinner message="Loading more pins..." />
         )}

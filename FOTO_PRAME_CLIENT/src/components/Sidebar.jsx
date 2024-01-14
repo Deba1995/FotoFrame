@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import { categories } from "../utils/data";
 import { useContext, useState } from "react";
-import { ThemeContext } from "../App";
+import ThemeContext from "../context/ThemeContext";
 const Sidebar = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const { currentTheme } = useContext(ThemeContext);

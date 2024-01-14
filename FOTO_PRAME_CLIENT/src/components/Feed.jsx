@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { client } from "../client";
 import MasonryLayout from "./MasonryLayout";
 import MasonrySkeleton from "./MasonrySkeleton.jsx";
-import { Box, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Spinner from "./Spinner.jsx";
 import { feedQuery, searchQuery } from "../utils/data.js";
 
@@ -37,14 +37,16 @@ const Feed = () => {
 
   if (!pins?.length)
     return (
-      <Typography
-        variant="caption"
-        fontWeight="semiBold"
-        textTransform={"capitalize"}
-        fontSize={18}
-      >
-        No Pins Available!
-      </Typography>
+      <Stack direction={"row"} justifyContent={"center"} alignItems={"center"}>
+        <Typography
+          variant="caption"
+          fontWeight="semiBold"
+          textTransform={"capitalize"}
+          fontSize={18}
+        >
+          No Pins Available!
+        </Typography>
+      </Stack>
     );
 
   return pins && <MasonryLayout pins={pins} />;

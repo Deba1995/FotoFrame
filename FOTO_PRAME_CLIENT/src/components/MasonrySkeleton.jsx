@@ -1,5 +1,5 @@
 import { Grid, Skeleton } from "@mui/material";
-import { ThemeContext } from "../App";
+import ThemeContext from "../context/ThemeContext";
 import { useContext } from "react";
 
 const MasonrySkeleton = () => {

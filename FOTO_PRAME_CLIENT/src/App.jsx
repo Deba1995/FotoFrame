@@ -1,14 +1,11 @@
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./containers/Home";
-import { ThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
+import ThemeContext from "./context/ThemeContext";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme";
 import { fetchUser } from "./utils/fetchUser";
-
-// Create a new context
-export const ThemeContext = createContext();
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
