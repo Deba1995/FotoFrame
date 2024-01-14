@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: "/foto-frame/", // Update the base URL to match your deployed website
+  base: "/", // Update the base URL to match your deployed website
   plugins: [react()],
   build: {
     // Set to 'production' for production optimizations
@@ -16,13 +16,5 @@ export default defineConfig({
     assetsDir: "assets",
     assetsInlineLimit: 4096,
     sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-        entryFileNames: "[name].[hash].js",
-        chunkFileNames: "[name].[hash].js",
-        assetFileNames: "[name].[hash].[ext]",
-      },
-    },
   },
 });
