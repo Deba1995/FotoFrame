@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import * as jwtDecode from "jwt-decode";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Container from "@mui/material/Container";
 import Snackbar from "@mui/material/Snackbar";
-import { shareVideo, logo } from "../assets";
+import { shareVideo } from "../assets";
 import { client } from "../client";
 import { useState } from "react";
 const Login = () => {
@@ -113,7 +113,9 @@ const Login = () => {
             gap: "12px",
           }}
         >
-          <img src={logo} width={130} alt="google-login-logo" />
+          <Typography variant="h1" fontSize={28} letterSpacing={2}>
+            FOTOPRAME
+          </Typography>
           <GoogleLogin
             onSuccess={(credentialResponse) => loginSuccess(credentialResponse)}
             onError={(err) => {
