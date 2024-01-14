@@ -8,7 +8,7 @@ const breakpointColumnsObj = {
   2000: 5,
   1200: 4,
   1000: 3,
-  500: 1,
+  500: 2,
 };
 
 const MasonryLayout = ({ pins }) => {
