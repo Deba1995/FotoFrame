@@ -14,10 +14,9 @@ import { UserProfile } from "../components";
 import { client } from "../client";
 import * as jwtDecode from "jwt-decode";
 import { userQuery } from "../utils/data";
-import { logoPage } from "../assets";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import Pins from "./Pins";
 import IconButton from "@mui/material/IconButton";
-import Avatar from "@mui/material/Avatar";
 import ThemeContext from "../context/ThemeContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import { fetchUser } from "../utils/fetchUser";
@@ -120,11 +119,17 @@ const Home = () => {
                     <DarkModeIcon />
                   )}
                 </IconButton>
-                <Link
-                  to={`user-profile/${user?._id}`}
-                  style={{ width: "60px" }}
-                >
-                  <Avatar alt="profile-logo" src={user?.image} />
+                <Link to={`user-profile/${user?._id}`}>
+                  <LazyLoadImage
+                    alt="profile-logo"
+                    effect="blur"
+                    src={user?.image}
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                    }}
+                  />
                 </Link>
               </Box>
             </Toolbar>

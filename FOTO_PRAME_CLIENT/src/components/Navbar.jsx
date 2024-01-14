@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AddToPhotosOutlinedIcon from "@mui/icons-material/AddToPhotosOutlined";
 import Tooltip from "@mui/material/Tooltip";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import {
   TextField,
   InputAdornment,
@@ -14,7 +15,6 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { logoPage } from "../assets";
 import ThemeContext from "../context/ThemeContext";
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();
@@ -83,11 +83,11 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
 
           <Tooltip title="Profile">
             <Link to={`user-profile/${user?._id}`}>
-              <img
+              <LazyLoadImage
                 alt="profile-logo"
+                effect="blur"
                 src={user?.image}
                 style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-                loading="lazy"
               />
             </Link>
           </Tooltip>
