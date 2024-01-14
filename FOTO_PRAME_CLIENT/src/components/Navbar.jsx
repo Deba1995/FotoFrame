@@ -76,7 +76,10 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
               <LazyLoadImage
                 alt="profile-logo"
                 effect="blur"
-                src={user?.image}
+                srcSet={`${user?.image.replace(
+                  /\.(jpe?g|png)/,
+                  ".webp"
+                )} 40w, ${user?.image} 80w`}
                 style={{ width: "40px", height: "40px", borderRadius: "50%" }}
               />
             </Link>
