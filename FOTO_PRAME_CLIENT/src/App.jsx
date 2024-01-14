@@ -44,32 +44,31 @@ function App() {
   }, []);
 
   return (
-    <Analytics>
-      <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
-        <ThemeProvider theme={currentTheme}>
-          <CssBaseline />
-          <SpeedInsights />
-          <Routes>
-            <Route
-              path="login"
-              element={
-                <Suspense fallback="Loading...">
-                  <LazyLogin />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/*"
-              element={
-                <Suspense fallback="Loading...">
-                  <LazyHome />{" "}
-                </Suspense>
-              }
-            />
-          </Routes>
-        </ThemeProvider>
-      </ThemeContext.Provider>
-    </Analytics>
+    <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
+      <Analytics />
+      <ThemeProvider theme={currentTheme}>
+        <CssBaseline />
+        <SpeedInsights />
+        <Routes>
+          <Route
+            path="login"
+            element={
+              <Suspense fallback="Loading...">
+                <LazyLogin />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/*"
+            element={
+              <Suspense fallback="Loading...">
+                <LazyHome />{" "}
+              </Suspense>
+            }
+          />
+        </Routes>
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 
