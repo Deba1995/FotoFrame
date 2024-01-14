@@ -114,7 +114,7 @@ const Pin = ({ pin: { postedBy, image, _id, save, destination } }) => {
       />
       {/* Pin Image */}
       <img
-        src={urlFor(image).width(350).url()}
+        src={urlFor(image).width(350).format("webp").url()}
         alt="user-post"
         style={{
           objectFit: "cover",
