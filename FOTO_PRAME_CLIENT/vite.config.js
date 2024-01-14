@@ -5,7 +5,6 @@ export default defineConfig({
   base: "/", // Update the base URL to match your deployed website
   plugins: [react()],
   build: {
-    outDir: "./fotoprame/app/",
     sourcemap: true,
     emptyOutDir: true,
     rollupOptions: {
