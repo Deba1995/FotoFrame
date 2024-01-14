@@ -7,6 +7,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme";
 import { fetchUser } from "./utils/fetchUser";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
+
 function App() {
   const [currentTheme, setCurrentTheme] = useState(lightTheme);
   // Function to change current theme
@@ -42,30 +44,32 @@ function App() {
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
-      <ThemeProvider theme={currentTheme}>
-        <CssBaseline />
-        <SpeedInsights />
-        <Routes>
-          <Route
-            path="login"
-            element={
-              <Suspense fallback="Loading...">
-                <LazyLogin />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/*"
-            element={
-              <Suspense fallback="Loading...">
-                <LazyHome />{" "}
-              </Suspense>
-            }
-          />
-        </Routes>
-      </ThemeProvider>
-    </ThemeContext.Provider>
+    <Analytics>
+      <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
+        <ThemeProvider theme={currentTheme}>
+          <CssBaseline />
+          <SpeedInsights />
+          <Routes>
+            <Route
+              path="login"
+              element={
+                <Suspense fallback="Loading...">
+                  <LazyLogin />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/*"
+              element={
+                <Suspense fallback="Loading...">
+                  <LazyHome />{" "}
+                </Suspense>
+              }
+            />
+          </Routes>
+        </ThemeProvider>
+      </ThemeContext.Provider>
+    </Analytics>
   );
 }
 
