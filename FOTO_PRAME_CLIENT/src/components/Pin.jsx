@@ -113,7 +113,7 @@ const Pin = ({ pin: { postedBy, image, _id, save, destination } }) => {
         key={vertical + horizontal}
       />
       {/* Pin Image */}
-      <Box sx={{ width: "100%", maxHeight: "510px" }}>
+      <Box sx={{ width: "100%", maxHeight: "510px", borderRadius: "10px" }}>
         <LazyLoadImage
           src={urlFor(image).width(350).format("webp").url()}
           alt="user-post"
@@ -126,6 +126,7 @@ const Pin = ({ pin: { postedBy, image, _id, save, destination } }) => {
             transition: "transform .5s", // Add transition here
             transform: postHovered ? "scale(1.02)" : "none",
             transformOrigin: "center",
+            borderRadius: "10px",
           }}
         />
       </Box>

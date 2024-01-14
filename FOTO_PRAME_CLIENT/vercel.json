@@ -1,9 +1,3 @@
 {
-  "rewrites": [
-    { "source": "/login", "destination": "/index.html" },
-    { "source": "/category/:slug*", "destination": "/index.html" },
-    { "source": "/pin-detail/:id*", "destination": "/index.html" },
-    { "source": "/user-profile/:id*", "destination": "/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
 }
