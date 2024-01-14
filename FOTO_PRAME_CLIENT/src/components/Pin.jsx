@@ -6,13 +6,13 @@ import {
   Box,
   Typography,
   IconButton,
-  Avatar,
   Tooltip,
   Badge,
   Snackbar,
 } from "@mui/material";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import ShareIcon from "@mui/icons-material/Share";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import { client, urlFor } from "../client";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -113,7 +113,7 @@ const Pin = ({ pin: { postedBy, image, _id, save, destination } }) => {
         key={vertical + horizontal}
       />
       {/* Pin Image */}
-      <img
+      <LazyLoadImage
         src={urlFor(image).width(350).format("webp").url()}
         alt="user-post"
         style={{
@@ -124,7 +124,6 @@ const Pin = ({ pin: { postedBy, image, _id, save, destination } }) => {
           transform: postHovered ? "scale(1.02)" : "none",
           transformOrigin: "center",
         }}
-        loading="lazy"
       />
 
       <>
@@ -173,7 +172,13 @@ const Pin = ({ pin: { postedBy, image, _id, save, destination } }) => {
               borderRadius: "10px",
             }}
           >
-            <Avatar alt="user-profile" src={postedBy?.image} />
+            {/* <Avatar alt="user-profile" src={postedBy?.image} /> */}
+            <LazyLoadImage
+              alt="postedBy-profile-logo"
+              effect="blur"
+              src={postedBy?.image}
+              style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+            />
             <Typography
               variant="caption"
               fontWeight="semiBold"

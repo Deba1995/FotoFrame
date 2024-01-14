@@ -7,6 +7,7 @@ import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 import SendIcon from "@mui/icons-material/Send";
 import CircularProgress from "@mui/material/CircularProgress";
 import WestIcon from "@mui/icons-material/West";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import Spinner from "./Spinner";
 import ThemeContext from "../context/ThemeContext";
 import { pinDetailMorePinQuery, pinDetailQuery } from "../utils/data";
@@ -121,7 +122,7 @@ const PinDetail = ({ user }) => {
           </Hidden>
 
           {/* Box with image left section*/}
-          <img
+          <LazyLoadImage
             src={pinDetail?.image && urlFor(pinDetail.image).width(510).url()}
             alt="user-post"
             style={{
@@ -238,7 +239,12 @@ const PinDetail = ({ user }) => {
                 textDecoration: "none",
               }}
             >
-              <Avatar alt="user-profile" src={pinDetail?.postedBy?.image} />
+              <LazyLoadImage
+                alt="user-profile"
+                effect="blur"
+                src={pinDetail?.postedBy?.image}
+                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+              />
               <Typography variant="caption" textTransform={"capitalize"}>
                 {pinDetail?.postedBy?.userName}
               </Typography>

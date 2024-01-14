@@ -5,6 +5,8 @@ import { googleLogout } from "@react-oauth/google";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import WestIcon from "@mui/icons-material/West";
 import ThemeContext from "../context/ThemeContext";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import {
   userCreatedPinsQuery,
   userQuery,
@@ -62,16 +64,24 @@ const UserProfile = () => {
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         <Box sx={{ position: "relative" }}>
-          <CardMedia
-            sx={{ height: 500 }}
-            image={randomImage}
-            title="banner-image"
+          <LazyLoadImage
+            style={{ height: 500, width: "100%", objectFit: "cover" }}
+            src={randomImage}
+            alt="banner-image"
+            effect="blur"
           />
           <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
-            <Avatar
+            <LazyLoadImage
               alt="user-image"
               src={user.image}
-              sx={{ position: "absolute", bottom: -30, height: 80, width: 80 }}
+              effect="blur"
+              style={{
+                position: "absolute",
+                bottom: -30,
+                height: 80,
+                width: 80,
+                borderRadius: "50%",
+              }}
             />
           </Box>
           <Tooltip title="Logout">
