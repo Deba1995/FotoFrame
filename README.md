@@ -11,7 +11,7 @@ Welcome to our FotoFrame! This is a user-friendly platform designed to allow use
 
 Check out the application: https://foto-prame.netlify.app/
 
-      ```bash
+      
          🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🐼`
 
 Feel free to explore the features and functionalities of the application. Please note that this is a demo environment and may not reflect the latest changes made to the codebase.
