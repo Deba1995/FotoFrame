@@ -7,6 +7,16 @@
 ## Project Overview
 Welcome to our FotoFrame! This is a user-friendly platform designed to allow users to create, share, and engage with images in a Pinterest-like manner. Our website stands out due to its simplicity and intuitive interface, making it easy for anyone to start pinning and sharing images right away.
 
+## Live Demo
+
+Check out the application: https://foto-prame.netlify.app/
+
+      ```bash
+         🚀 Give a Star ⭐️ & Fork to this project ... Happy coding! 🐼`
+
+Feel free to explore the features and functionalities of the application. Please note that this is a demo environment and may not reflect the latest changes made to the codebase.
+
+
 ## Table of Contents
 
 - [Screenshots](#screenshots)
@@ -18,8 +28,11 @@ Welcome to our FotoFrame! This is a user-friendly platform designed to allow use
 
 ## Screenshots
 ![LightMode Webiste Look](https://github.com/Deba1995/FotoFrame/assets/38239468/64f7dffd-2c0f-4f70-971d-d22a9560ff6f)
+
 Shows the website in light mode
+
 ![DarkMode Webiste Look](https://github.com/Deba1995/FotoFrame/assets/38239468/e8165b92-f7c1-4dc5-808a-aa29168d03c0)
+
 Shows the website in dark mode
 
 ## Features
