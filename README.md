@@ -51,11 +51,12 @@ Follow these steps to set up the project:
 
  - Configure CORS settings in Sanity and Google API to allow the necessary origins (local or deployed).
 
-4.
-  ```bash
-  cd ..
-  cd FOTO_FRAME_SANITY_SERVER
-  
+4. Go to server dir:
+   
+   ```bash
+     cd ..
+     cd FOTO_FRAME_SANITY_SERVER
+
 5. In the fotoframe sanity server, go to the root directory and edit sanity.config.js with the required information. Refer to Sanity documentation for details.
 6.
    ```bash
