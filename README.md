@@ -16,6 +16,10 @@ Check out the application: https://foto-prame.netlify.app/
 
 Feel free to explore the features and functionalities of the application. Please note that this is a demo environment and may not reflect the latest changes made to the codebase.
 
+## License
+
+This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
+
 
 ## Table of Contents
 
